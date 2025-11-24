@@ -8,15 +8,10 @@ import os
 
 st.set_page_config(page_title="Data Dashboard", layout="wide")
 
-CSV_PATH = "/Users/omartharwat/Desktop/Eplison/mid-project/bodyPerformance_cleaned.csv"
-CACHE_PATH = CSV_PATH + ".parquet"  # or .pkl if you prefer pickle
+CSV_PATH = "bodyPerformance_cleaned.csv"
 
 def load_body_performance():
-    if os.path.exists(CACHE_PATH) and os.path.getmtime(CACHE_PATH) >= os.path.getmtime(CSV_PATH):
-        return pd.read_parquet(CACHE_PATH)  # or pd.read_pickle
-    df = pd.read_csv(CSV_PATH)
-    df.to_parquet(CACHE_PATH)  # cache for next time
-    return df
+    return pd.read_csv(CSV_PATH)
 
 df = load_body_performance()
 
